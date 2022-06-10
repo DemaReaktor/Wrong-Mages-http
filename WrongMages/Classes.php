@@ -29,15 +29,32 @@ class Page{
             $this->language = $language;
     }
 
+    public function next_language(){
+        if($this->language=='ua')
+        return 'uk';
+        return 'ua';
+    }
+
     public function content($name){
         $name = strip_tags($name);
 
         $page = file_get_contents(Config::$folder.'html/'.$this->language.'/'.self::get_page($name));
 
+        $text = file_get_contents(Config::$folder.'html/'.$this->language.'/menu.html').$page;
+
         if($page==false)
-            return TechnicalWork::send_message('ця сторінка з цією мовою ще не створена').
+            $text = file_get_contents(Config::$folder.'html/ua/menu.html').TechnicalWork::send_message('ця сторінка з цією мовою ще не дороблена').
             file_get_contents(Config::$folder.'html/ua/'.self::get_page($name));
-        return $page;
+
+
+        $text = str_replace('{language}',$this->language,$text);
+        $text = str_replace('{next_language}',$this->next_language(),$text);
+        // foreach($element in [
+        //     ['{language}',$this->language],
+        //     ['{next_language}',$this->next_language()]])
+        //         $text = str_replace($element[0],$element[1],$text);
+
+        return $text;
     }
 
     public static function get_page($name){
