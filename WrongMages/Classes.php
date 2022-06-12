@@ -10,6 +10,7 @@ interface ISingleton{
     public static function get_inst();
 }
 class Settings implements ISingleton{
+    public $gets;
     public $page;
     static $inst;
 
@@ -21,6 +22,7 @@ class Settings implements ISingleton{
         if($_GET['language'])
             Language::set_value($_GET['language']);
         self::$inst->page = strip_tags($_GET['page']??'main');
+
         return self::$inst;
     }
     public static function get_inst(){
@@ -30,7 +32,7 @@ class Settings implements ISingleton{
 class Component{
     protected $language = 'ua';
     protected $name = 'main';
-    protected $text;
+    protected $file;
 
     function __construct(string $name,string $language = 'ua'){
         if(in_array($language,Config::$languages))
@@ -38,15 +40,16 @@ class Component{
         if(in_array($name,Config::$pages))
             $this->name = $name;
 
-        $this->text = file_get_contents(Config::$folder.'html/'.$this->language.'/'.Config::$pages[$this->name].'.php');
-        if($this->text == null){
-            $this->text = file_get_contents(Config::$folder.'html/ua/'.Config::$pages[$this->name].'.php');
-            $this->language = 'ua';
+        $this->file = Config::$folder.'html/'.$this->language.'/'.Config::$pages[$this->name].'.php';
+
+        if(!file_exists($this->file)){
+                $this->file = Config::$folder.'html/ua/'.Config::$pages[$this->name].'.php';
+                $this->language = 'ua';
+            }
         }
-    }
     public function get_name(){ return $this->name; }
     public function get_language(){ return $this->language; }
-    public function get_text(){ return $this->text; }
+    public function get_file(){ return $this->file; }
 }
 
 class Page{
@@ -63,29 +66,20 @@ class Page{
         return 'ua';
     }
 
-    public function content($name){
+    public function set_content($name){
         $name = strip_tags($name);
 
         $page = new Component($name, $this->language);
 
         $menu = new Component('menu',$this->language);
-        $text= '';
 
-        foreach([$menu,$page] as $element){
+        foreach([$menu
+        ,$page
+        ] as $element){
             if($element->get_language()!=$this->language)
-                $text = $text.TechnicalWork::get_message('ця сторінка з цією мовою ще не дороблена');
-            $text = $text.$element->get_text();    
+                echo TechnicalWork::get_message('ця сторінка з цією мовою ще не дороблена');
+            include $element->get_file();    
         }
-
-        foreach([
-            ['{page}',Settings::get_inst()->page],
-            ['{language}',$this->language],
-            ['{next_language}',$this->next_language()]
-            ]
-            as $element)
-                $text = str_replace($element[0],$element[1],$text);
-
-        return $text;
     }
 }
 class TechnicalWork{

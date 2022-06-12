@@ -94,20 +94,20 @@
     </div>
     <h1>Посилання на інші сторінки</h1>
     <div class="button">
-        <a href="http://localhost/WrongMages/index.php?page=guide&language={language}">гайд по грі</a>
+        <a href="http://localhost/WrongMages/index.php?page=guide">гайд по грі</a>
     </div>
     <div class="button">
-        <a href="http://localhost/WrongMages/index.php?page=news&language={language}">новини</a>
+        <a href="http://localhost/WrongMages/index.php?page=news">новини</a>
     </div>
     <div class="button">
-        <a href="http://localhost/WrongMages/index.php?page=tokenomic&language={language}">токеноміка</a>
+        <a href="http://localhost/WrongMages/index.php?page=tokenomic">токеноміка</a>
     </div>
     <div class="button">
-        <a href="http://localhost/WrongMages/index.php?page=plans&language={language}">
+        <a href="http://localhost/WrongMages/index.php?page=plans">
             плани</a>
     </div>
     <div class="button">
-        <a href="http://localhost/WrongMages/index.php?page=feedback&language={language}">зворотній зв'язок
+        <a href="http://localhost/WrongMages/index.php?page=feedback">зворотній зв'язок
         </a>
     </div>
 </body>

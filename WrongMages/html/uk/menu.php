@@ -17,9 +17,9 @@
         </div>
         <div id="right-menu-items">
                 <form method=post action="next-language.php">
-                    <input type="image" id="language" src= "<?php echo Config::$git_folder; ?>images/ua.png"   alt="language" >
+                    <input type="image" id="language" src= "<?php echo Config::$git_folder; ?>images/uk.png"   alt="language" >
                 </form>
-            <div class="button" id="play">Грати</div>
+            <div class="button" id="play">Play</div>
             <img id="menu-button" src="<?php echo Config::$git_folder; ?>images/menu.png"  alt="menu icon">
         </div>
     </div>
