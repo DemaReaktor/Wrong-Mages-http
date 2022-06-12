@@ -1,6 +1,6 @@
 <?php
 class Config{
-//    public static $folder = 'https://demareaktor.github.io/Wrong-Mages-site/';
+   public static $git_folder = 'https://demareaktor.github.io/Wrong-Mages-site/';
    public static $folder = 'D:/wamp/apache2/htdocs/WrongMages/';
    public static $languages = ['ua','uk'];
    public static $pages = ['main'=>'index','guide'=>'guide','news'=>'news','plans'=>'plans','tokenomic'=>'tokenomic','feedback'=>'feedback','menu'=>'menu'];
@@ -16,6 +16,8 @@ class Settings implements ISingleton{
     public static function init(){
         self::$inst = new self();
 
+        if($_POST['language'])
+            Language::set_value($_POST['language']);
         if($_GET['language'])
             Language::set_value($_GET['language']);
         self::$inst->page = strip_tags($_GET['page']??'main');
@@ -36,9 +38,9 @@ class Component{
         if(in_array($name,Config::$pages))
             $this->name = $name;
 
-        $this->text = file_get_contents(Config::$folder.'html/'.$this->language.'/'.Config::$pages[$this->name].'.html');
+        $this->text = file_get_contents(Config::$folder.'html/'.$this->language.'/'.Config::$pages[$this->name].'.php');
         if($this->text == null){
-            $this->text = file_get_contents(Config::$folder.'html/ua/'.Config::$pages[$this->name].'.html');
+            $this->text = file_get_contents(Config::$folder.'html/ua/'.Config::$pages[$this->name].'.php');
             $this->language = 'ua';
         }
     }
@@ -110,7 +112,6 @@ class Language{
     }
     public static function get_current_language(){
         return $_COOKIE['language']??'ua';
-        echo gettype($language);
     }
 }
 ?>

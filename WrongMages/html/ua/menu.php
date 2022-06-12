@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="ua">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://demareaktor.github.io/Wrong-Mages-site/css/generic.css">
-    <link rel="stylesheet" type="text/css" href="https://demareaktor.github.io/Wrong-Mages-site/css/guide-dekstop.css">
-    <link rel="shortcut icon" href="https://demareaktor.github.io/Wrong-Mages-site/images/icon.gif" />
+    <link rel="stylesheet" type="text/css" href="<?php echo Config::$git_folder.'css/generic.css'; ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo Config::$git_folder.'css/guide-dekstop.css'; ?>">
+    <link rel="shortcut icon" href="<?php echo Config::$git_folder.'images/icon.gif'; ?>" />
 </head>
 
 <body id="fon">
@@ -18,10 +17,10 @@
             <img id="twitter" src="https://demareaktor.github.io/Wrong-Mages-site/images/twitter.png"  alt="twitter">
         </div>
         <div id="right-menu-items">
-            <a href="http://localhost/WrongMages/index.php?page={page}&language={next_language}">
-                <img id="language" src= "https://demareaktor.github.io/Wrong-Mages-site/images/{language}.png" alt="language" >
-            </a>
-            <div class="button" id="play" href="">Грати</div>
+                <form method=post action="next-language.php">
+                    <input type="image" id="language" src= "https://demareaktor.github.io/Wrong-Mages-site/images/<?php echo  ?>.png"   alt="language" >
+                </form>
+            <div class="button" id="play">Грати</div>
             <img id="menu-button" src="https://demareaktor.github.io/Wrong-Mages-site/images/menu.png"  alt="menu icon">
         </div>
     </div>

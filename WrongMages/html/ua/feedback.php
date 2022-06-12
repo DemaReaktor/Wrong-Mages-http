@@ -27,10 +27,18 @@
     </div>
     <h2>Коментарі</h2>
     <p>Хочете побажати нам удачі, розкритикувати нас за руки із не того місця, дати рекомендацію чи просто поспілкуватись? Тоді вам сюди.</p>
-    <div class="comment-table">
-        <p>Ім'я</p><input>
-        <p>Коментар</p>
-        <textarea rows="5" cols="50"></textarea>
+    <div id="comment-left">
+        <div class="comment-table">
+            <p>Ім'я</p><input id="comment-name" type="text">
+            <p>Коментар</p>
+            <textarea rows="6" cols="70"></textarea>
+            <button href="">Відправити коментарій</button>
+            <!-- <script>
+                function send_comment() {
+                   document.getElementById("comment-name").value;
+                }
+                </script> -->
+        </div>
     </div>
 </body>
 
