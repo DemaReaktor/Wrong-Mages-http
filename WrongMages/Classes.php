@@ -76,8 +76,10 @@ class Page{
         }
 
         foreach([
+            ['{page}',Settings::get_inst()->page],
             ['{language}',$this->language],
-            ['{next_language}',$this->next_language()]]
+            ['{next_language}',$this->next_language()]
+            ]
             as $element)
                 $text = str_replace($element[0],$element[1],$text);
 
