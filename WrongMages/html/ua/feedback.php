@@ -30,7 +30,9 @@
             <input type="submit" value="Відправити коментарій">
     </form> 
     </div>
+    <div class="comments">
 <?php Comment::echo_comments(); ?>
+</div>
 </body>
 
 </html>

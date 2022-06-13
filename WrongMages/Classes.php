@@ -17,6 +17,7 @@ class Settings implements ISingleton{
 
     public static function init(){
         self::$inst = new self();
+        // unset($_SESSION['comments-name']);
 
         self::$inst->language = new Language($_COOKIE['language']);
         if(isset($_POST['language_x'])){
