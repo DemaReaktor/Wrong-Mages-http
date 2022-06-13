@@ -1,4 +1,7 @@
 <?php 
+if(!$_SESSION)
+session_start();
+
 include_once 'Classes.php';
 
 Settings::init();

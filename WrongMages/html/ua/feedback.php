@@ -24,10 +24,10 @@
     <p>Хочете побажати нам удачі, розкритикувати нас за руки із не того місця, дати рекомендацію чи просто поспілкуватись? Тоді вам сюди.</p>
     <div id="comment-left">
     <form method=post class="comment-table" action="index.php<?php echo Settings::get_inst()->get_gets(); ?>">
-            <p>Ім'я</p><input id="comment-name" type="comment-name">
+            <p>Ім'я</p><input type="text" id="comment-name" name="comment-name">
             <p>Коментар</p>
             <textarea name="comment-text" rows="6" cols="70">...</textarea>
-            <input type=button name="comment-button" value="Відправити коментарій">
+            <input type="submit" value="Відправити коментарій">
     </form> 
     </div>
 <?php Comment::echo_comments(); ?>

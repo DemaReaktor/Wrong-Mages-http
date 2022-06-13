@@ -19,12 +19,12 @@ class Settings implements ISingleton{
         self::$inst = new self();
 
         self::$inst->language = new Language($_COOKIE['language']);
-        if($_POST['language_x']){
+        if(isset($_POST['language_x'])){
             self::$inst->language->next_language();
             self::$inst->language->set_cookie();
         }
 
-        if($_POST['comment-button']){
+        if(isset($_POST['comment-name'])){
             $com =  new Comment($_POST['comment-name'],$_POST['comment-text']);
             $com->add_comment();
         }
@@ -156,24 +156,22 @@ class Comment{
         $this->text = strip_tags($text);
     }
     public function add_comment(){
-        if(!$_SESSION['comments'])
-            $_SESSION['comments'] = array();
-        
-        $_SESSION['comments'][count($_SESSION['comments'])] = $this;
-    }
-    public function to_string(){
-        $text = '<div class="user-commnet-table">
-        <p class="user-commnet-name">'.$this->name.'</p>
-        <p class="user-commnet-text" >'.$this->text.'</p>
-    </div>';
+        if(!isset($_SESSION['comments-name'])){
+            $_SESSION['comments-name'] = [];
+            $_SESSION['comments-text'] = [];
+        }
 
-        return $text;
+        $_SESSION['comments-name'][count($_SESSION['comments-name'])+1] = $this->name;
+        $_SESSION['comments-text'][count($_SESSION['comments-text'])+1] = $this->text;
     }
     public static function echo_comments(){
-        if($_SESSION['comments']){
-            foreach($_SESSION['comments'] as $element)
-                echo $element->to_string();
+        if(isset($_SESSION['comments-name']))
+            for($i = 0;$i < count($_SESSION['comments-name']);$i++){
+                echo '<div class="user-commnet-table">
+                    <p class="user-commnet-name">'.$_SESSION['comments-name'][$i].'</p>
+                    <p class="user-commnet-text" >'.$_SESSION['comments-text'][$i].'</p>
+                    </div>';
+            }
         }
     }
-}
 ?>
