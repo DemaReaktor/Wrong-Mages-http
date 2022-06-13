@@ -23,12 +23,12 @@
     <h2>Коментарі</h2>
     <p>Хочете побажати нам удачі, розкритикувати нас за руки із не того місця, дати рекомендацію чи просто поспілкуватись? Тоді вам сюди.</p>
     <div id="comment-left">
-        <div class="comment-table">
-            <p>Ім'я</p><input id="comment-name" type="text">
+    <form method=post class="comment-table" action="index.php<?php echo Settings::get_inst()->get_gets(); ?>">
+            <p>Ім'я</p><input id="comment-name" type="comment-name">
             <p>Коментар</p>
-            <textarea rows="6" cols="70"></textarea>
-            <button acttion=>Відправити коментарій</button>
-        </div>
+            <textarea name="comment-text" rows="6" cols="70"></textarea>
+            <input type=button name="comment-button" value="click">Відправити коментарій</input>
+    </form> 
     </div>
 </body>
 

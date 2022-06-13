@@ -23,6 +23,9 @@ class Settings implements ISingleton{
             self::$inst->language->next_language();
             self::$inst->language->set_cookie();
         }
+        
+        if($_POST['comment-button'])
+            new Comment($_POST['comment-name'],$_POST['comment-text'])->add_comment();
 
         self::$inst->gets = $_GET;
 
@@ -138,25 +141,23 @@ class Language{
         $this->value = Config::$languages[$index];
         return $this->value;
     }
-
-    // public static function set_value($language){
-    //     $language = strip_tags($language);
-    //     if(in_array($language,Config::$languages)){
-    //         setcookie('language',$language);
-    //         $_COOKIE['language'] = $language;
-    //     }
-    // }
     public static function get_current_language(){
         return $_COOKIE['language']??'ua';
     }
-    // public function next_language($language){
-    //     $count = count(Config::$languages);
-    //     $index = array_search($language,Config::$languages) + 1;
+}
+class Comment{
+    public $name;
+    public $text;
 
-    //     if($index == $count)
-    //         $index = 0;
-
-    //     return Config::$languages[$index];
-    // }
+    function __construct(string $name,string $text){
+        $this->name = strip_tags($name);
+        $this->text = strip_tags($text);
+    }
+    public function add_comment(){
+        if(!$_SESSION['comments'])
+            $_SESSION['comments'] = array();
+        
+        $_SESSION['comments'][count($_SESSION['comments'])] = $this;
+    }
 }
 ?>
