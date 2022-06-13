@@ -16,7 +16,7 @@
             <img id="twitter" src="<?php echo Config::$git_folder; ?>images/twitter.png"  alt="twitter">
         </div>
         <div id="right-menu-items">
-                <form method=post action="index.php">
+                <form method=post action="index.php<?php echo Settings::get_inst()->get_gets(); ?>">
                     <input type="image" name="language" id="language" src= "<?php echo Config::$git_folder; ?>images/ua.png"   alt="language" >
                 </form>
             <div class="button" id="play">Грати</div>

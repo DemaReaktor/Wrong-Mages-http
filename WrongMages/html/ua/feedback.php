@@ -7,11 +7,6 @@
     <link rel="stylesheet" type="text/css" href="https://demareaktor.github.io/Wrong-Mages-site/css/generic.css">
     <link rel="stylesheet" type="text/css" href="https://demareaktor.github.io/Wrong-Mages-site/css/feedback.css">
     <link rel="shortcut icon" href="https://demareaktor.github.io/Wrong-Mages-site/images/icon.gif" />
-    <script>
-        function add_comment_panel(){
-            document.write("<?php ");
-        }
-    </script>
 </head>
 
 <body id="fon">
@@ -32,12 +27,7 @@
             <p>Ім'я</p><input id="comment-name" type="text">
             <p>Коментар</p>
             <textarea rows="6" cols="70"></textarea>
-            <button href="">Відправити коментарій</button>
-            <!-- <script>
-                function send_comment() {
-                   document.getElementById("comment-name").value;
-                }
-                </script> -->
+            <button acttion=>Відправити коментарій</button>
         </div>
     </div>
 </body>

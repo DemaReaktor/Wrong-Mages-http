@@ -10,7 +10,7 @@ interface ISingleton{
     public static function get_inst();
 }
 class Settings implements ISingleton{
-    public $gets;
+    protected $gets;
     public $page;
     public $language;
     static $inst;
@@ -24,10 +24,29 @@ class Settings implements ISingleton{
             self::$inst->language->set_cookie();
         }
 
+        self::$inst->gets = $_GET;
+
         self::$inst->page = strip_tags($_GET['page']??'main');
 
         return self::$inst;
     }
+    public function change_get($key,$value){
+        self::$inst->gets[$key] = $value;
+    }
+
+    public function get_gets(){
+        $text = '';
+
+        if(self::$inst->gets){
+            $text = '?';
+
+            foreach(array_keys(self::$inst->gets) as $element)
+                $text = $text.$element.'='.self::$inst->gets[$element].'&';
+        }
+
+        return $text;
+    }
+
     public static function get_inst(){
         return self::$inst;
     }
