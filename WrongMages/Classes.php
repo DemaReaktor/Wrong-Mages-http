@@ -23,9 +23,11 @@ class Settings implements ISingleton{
             self::$inst->language->next_language();
             self::$inst->language->set_cookie();
         }
-        
-        if($_POST['comment-button'])
-            new Comment($_POST['comment-name'],$_POST['comment-text'])->add_comment();
+
+        if($_POST['comment-button']){
+            $com =  new Comment($_POST['comment-name'],$_POST['comment-text']);
+            $com->add_comment();
+        }
 
         self::$inst->gets = $_GET;
 
@@ -149,7 +151,7 @@ class Comment{
     public $name;
     public $text;
 
-    function __construct(string $name,string $text){
+    public function __construct(string $name,string $text){
         $this->name = strip_tags($name);
         $this->text = strip_tags($text);
     }
@@ -158,6 +160,20 @@ class Comment{
             $_SESSION['comments'] = array();
         
         $_SESSION['comments'][count($_SESSION['comments'])] = $this;
+    }
+    public function to_string(){
+        $text = '<div class="user-commnet-table">
+        <p class="user-commnet-name">'.$this->name.'</p>
+        <p class="user-commnet-text" >'.$this->text.'</p>
+    </div>';
+
+        return $text;
+    }
+    public static function echo_comments(){
+        if($_SESSION['comments']){
+            foreach($_SESSION['comments'] as $element)
+                echo $element->to_string();
+        }
     }
 }
 ?>

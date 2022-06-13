@@ -26,10 +26,11 @@
     <form method=post class="comment-table" action="index.php<?php echo Settings::get_inst()->get_gets(); ?>">
             <p>Ім'я</p><input id="comment-name" type="comment-name">
             <p>Коментар</p>
-            <textarea name="comment-text" rows="6" cols="70"></textarea>
-            <input type=button name="comment-button" value="click">Відправити коментарій</input>
+            <textarea name="comment-text" rows="6" cols="70">...</textarea>
+            <input type=button name="comment-button" value="Відправити коментарій">
     </form> 
     </div>
+<?php Comment::echo_comments(); ?>
 </body>
 
 </html>
